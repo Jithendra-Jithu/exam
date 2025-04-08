@@ -16,17 +16,27 @@ pipeline {
             }
         }
         
-       stage('Install Dependencies') {
+      stage('Install Dependencies') {
     steps {
         script {
             sh '''
+                echo "📁 Current working directory:"
+                pwd
+
+                echo "📄 List of files:"
+                ls -la
+
+                echo "🐍 Creating virtual environment..."
                 python3 -m venv venv
+
+                echo "📦 Installing dependencies..."
                 venv/bin/pip install --upgrade pip setuptools
                 venv/bin/pip install -r requirements.txt
             '''
         }
     }
 }
+
         
         stage('Build and Archive') {
             steps {
