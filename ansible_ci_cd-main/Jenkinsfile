@@ -16,17 +16,17 @@ pipeline {
             }
         }
         
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    sh '''
-                        bash -c "source venv/bin/activate"
-                        venv/bin/pip install -r requirements.txt
-                        venv/bin/pip install setuptools
-                    '''
-                }
-            }
+       stage('Install Dependencies') {
+    steps {
+        script {
+            sh '''
+                python3 -m venv venv
+                venv/bin/pip install --upgrade pip setuptools
+                venv/bin/pip install -r requirements.txt
+            '''
         }
+    }
+}
         
         stage('Build and Archive') {
             steps {
